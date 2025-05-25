@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nosotros | YSE Edutech</title>
+    <style>
+        :root {
+            --primary: #2C3E50;
+            --secondary: #E74C3C;
+            --accent: #3498DB;
+            --light: #ECF0F1;
+            --dark: #1A252F;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            padding: 40px 20px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: white;
+        }
+        .logo span {
+            color: var(--accent);
+        }
+        nav {
+            background-color: var(--primary);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav a {
+            color: white;
+            padding: 18px 25px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        nav a:hover {
+            background-color: var(--secondary);
+        }
+        .content {
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+        .hero h1 {
+            color: var(--primary);
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn:hover {
+            background-color: #C0392B;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .about-section {
+            margin: 60px 0;
+        }
+        .section-title {
+            color: var(--primary);
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 10px;
+            display: inline-block;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        .about-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+            margin-top: 30px;
+        }
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+        .about-image:hover img {
+            transform: scale(1.03);
+        }
+        .values {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .value-card {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        .value-card h3 {
+            color: var(--secondary);
+            margin-top: 0;
+        }
+        .team-section {
+            margin: 60px 0;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .team-member {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .member-photo {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .member-info {
+            padding: 20px;
+            text-align: center;
+        }
+        .member-info h4 {
+            margin: 10px 0 5px;
+            color: var(--primary);
+        }
+        .member-info p {
+            color: var(--secondary);
+            font-weight: 500;
+            margin: 0;
+        }
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+            margin: 60px 0;
+            text-align: center;
+        }
+        .stat-item {
+            flex: 1;
+            min-width: 150px;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin: 10px 0;
+        }
+        .stat-label {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .footer-links a {
+            color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            nav a {
+                padding: 15px 20px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">Y<span>SE</span></div>
+    <p>Transformando la educación digital en Chile</p>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="cursos.html">Cursos</a>
+    <a href="nosotros.html">Nosotros</a>
+    <a href="contacto.html">Contacto</a>
+    <a href="blog.html">Blog</a>
+</nav>
+
+<div class="content">
+    <section class="hero">
+        <h1>Conoce Nuestra Historia</h1>
+        <p>Descubre cómo YSE Edutech está revolucionando la educación digital en Chile con soluciones innovadoras y accesibles</p>
+    </section>
+
+    <section class="about-section">
+        <h2 class="section-title">Nuestro Origen</h2>
+        <div class="about-container">
+            <div class="about-text">
+                <p>Fundada en 2020 en Providencia, Santiago, YSE Edutech nació de la visión compartida de un grupo de profesionales de la educación y tecnología, comprometidos con reducir la brecha educativa en Chile.</p>
+                <p>Lo que comenzó como un pequeño equipo trabajando en una oficina compartida, hoy es una de las plataformas de educación digital con mayor crecimiento en el país, llegando a miles de estudiantes en todas las regiones.</p>
+                <p>Nuestro modelo único combina pedagogía de vanguardia con desarrollo tecnológico propio, creando experiencias de aprendizaje personalizadas y efectivas.</p>
+                <a href="contacto.html" class="btn">Contáctanos</a>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Equipo fundador de YSE Edutech">
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <h2 class="section-title">Nuestra Filosofía</h2>
+        <div class="values">
+            <div class="value-card">
+                <h3>Misión</h3>
+                <p>Democratizar el acceso a educación de calidad mediante plataformas digitales innovadoras que se adapten a las necesidades de cada estudiante, institución educativa y empresa en Chile.</p>
+            </div>
+            <div class="value-card">
+                <h3>Visión</h3>
+                <p>Ser reconocidos como el referente en soluciones edtech en Latinoamérica, liderando la transformación digital de la educación con tecnología accesible, pedagógicamente sólida y socialmente responsable.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <h2 class="section-title">Nuestros Valores</h2>
+        <div class="values">
+            <div class="value-card">
+                <h3>Innovación</h3>
+                <p>Buscamos constantemente nuevas formas de mejorar el aprendizaje mediante tecnología de punta y metodologías pedagógicas innovadoras.</p>
+            </div>
+            <div class="value-card">
+                <h3>Excelencia Educativa</h3>
+                <p>Nuestros contenidos son desarrollados por expertos y validados pedagógicamente para garantizar los más altos estándares de calidad.</p>
+            </div>
+            <div class="value-card">
+                <h3>Impacto Social</h3>
+                <p>Creemos en la educación como herramienta de movilidad social y desarrollo país, por eso priorizamos la accesibilidad.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <h2 class="section-title">Nuestro Equipo</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Fundador" class="member-photo">
+                <div class="member-info">
+                    <h4>Juan Pérez</h4>
+                    <p>CEO & Fundador</p>
+                    <p>PhD en Educación Tecnológica</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="CTO" class="member-photo">
+                <div class="member-info">
+                    <h4>María González</h4>
+                    <p>Directora de Tecnología</p>
+                    <p>Experta en Desarrollo EdTech</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Directora Pedagógica" class="member-photo">
+                <div class="member-info">
+                    <h4>Carlos Rodríguez</h4>
+                    <p>Director Pedagógico</p>
+                    <p>Magíster en Innovación Educativa</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <h2 class="section-title">YSE en Números</h2>
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">15K+</div>
+                <div class="stat-label">Estudiantes</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">120+</div>
+                <div class="stat-label">Cursos Disponibles</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Regiones Cubiertas</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">95%</div>
+                <div class="stat-label">Satisfacción</div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <div class="footer-links">
+        <a href="terminos.html">Términos de Servicio</a>
+        <a href="privacidad.html">Política de Privacidad</a>
+        <a href="preguntas.html">Preguntas Frecuentes</a>
+    </div>
+    <p>YSE &copy; 2023 - Todos los derechos reservados</p>
+    <p>Oficina Central: Providencia, Santiago de Chile</p>
+</footer>
+
+</body>
+</html>

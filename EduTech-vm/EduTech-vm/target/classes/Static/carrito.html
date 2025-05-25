@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrito con localStorage</title>
+</head>
+<body>
+  <h2>Productos</h2>
+  <div id="productos">
+    <div class="producto">
+      <span>Pelota - $10</span>
+      <button onclick="agregarAlCarrito('Pelota', 10)">Agregar</button>
+    </div>
+    <div class="producto">
+      <span>Zapatillas - $50</span>
+      <button onclick="agregarAlCarrito('Zapatillas', 50)">Agregar</button>
+    </div>
+  </div>
+
+  <h2>Carrito</h2>
+  <div id="carrito"></div>
+  <p><strong>Total: $<span id="total">0</span></strong></p>
+
+  <script src="app_carrito.js"></script>
+</body>
+</html>
