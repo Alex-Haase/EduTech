@@ -1,29 +1,37 @@
-const carrito=[];
+let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-function agregarCarrito(nombre,precio){
-    carrito.push({ nombre, precion});
-    mostrarCarrito();
+function guardarCarrito() {
+  localStorage.setItem('carrito', JSON.stringify(carrito));
 }
 
-function mostrarCarrito(){
-    const carritoDiv = document.getElementById('carrito');
-    carritoDiv.innerHTML= '';
-    let total=0;
-
-    carritoDiv.forEach((item,index)=>{
-        total +=item.precio;
-        const div=document.createElementary('div');
-        div.textContent = '${item.nombre} - $${item.precio}';
-        const btn=document.createElement('button');
-        btn.onclick = 'Eliminar';
-        btn.onclick = () => {
-            carrito.splice(index, 1);
-            mostrarCarrito();
-        };
-        div.appendChild(btn);
-        carritoDiv.appendChild(div);
-    });
-
-    document.getElementById('total').textContent=total;
+function agregarAlCarrito(nombre, precio) {
+  carrito.push({ nombre, precio });
+  guardarCarrito();
+  mostrarCarrito();
 }
-<script src="app_carrito.js"></script>
+
+function mostrarCarrito() {
+  const carritoDiv = document.getElementById('carrito');
+  carritoDiv.innerHTML = '';
+  let total = 0;
+
+  carrito.forEach((item, index) => {
+    total += item.precio;
+    const div = document.createElement('div');
+    div.textContent = `${item.nombre} - $${item.precio}`;
+    const btn = document.createElement('button');
+    btn.textContent = 'Eliminar';
+    btn.onclick = () => {
+      carrito.splice(index, 1);
+      guardarCarrito();
+      mostrarCarrito();
+    };
+    div.appendChild(btn);
+    carritoDiv.appendChild(div);
+  });
+
+  document.getElementById('total').textContent = total;
+}
+
+// Mostrar carrito al cargar la página
+mostrarCarrito();
