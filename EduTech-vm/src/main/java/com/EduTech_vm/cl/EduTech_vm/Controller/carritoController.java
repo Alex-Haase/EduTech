@@ -17,7 +17,7 @@ public class carritoController {
     private final List<Curso> carrito = new ArrayList<>();
 
     @Autowired
-    private CursoService cursoService;
+    private cursoService cursoService;
     
     @PostMapping("/agregar/{id}")
     public String agregarCurso(@PathVariable int id){

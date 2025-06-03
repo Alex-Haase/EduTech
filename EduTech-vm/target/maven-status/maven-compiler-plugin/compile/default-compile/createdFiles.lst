@@ -1,9 +1,10 @@
-com\EduTech_vm\cl\EduTech_vm\Model\usuario.class
-com\EduTech_vm\cl\EduTech_vm\Repository\usuarioRepository.class
 com\EduTech_vm\cl\EduTech_vm\Controller\cursoController.class
+com\EduTech_vm\cl\EduTech_vm\Controller\carritoController.class
 com\EduTech_vm\cl\EduTech_vm\Controller\usuarioController.class
 com\EduTech_vm\cl\EduTech_vm\Service\cursoService.class
 com\EduTech_vm\cl\EduTech_vm\Service\usuarioService.class
 com\EduTech_vm\cl\EduTech_vm\Model\Curso.class
 com\EduTech_vm\cl\EduTech_vm\EduTechVmApplication.class
 com\EduTech_vm\cl\EduTech_vm\Repository\cursoRepository.class
+com\EduTech_vm\cl\EduTech_vm\Model\usuario.class
+com\EduTech_vm\cl\EduTech_vm\Repository\usuarioRepository.class
