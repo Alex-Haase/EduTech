@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
@@ -28,6 +31,11 @@ public class carritoController {
             return "Curso agregado al carrito: " + curso.getTitulo();
         }
         return "Curso no encontrado";
+    }
+
+    @GetMapping
+    public List<Curso> verCarrito(){
+        return carrito;
     }
     
 }
