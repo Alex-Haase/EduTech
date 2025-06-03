@@ -16,7 +16,6 @@ import com.EduTech_vm.cl.EduTech_vm.Model.Curso;
 import com.EduTech_vm.cl.EduTech_vm.Service.cursoService;
 
 
-
 @RestController
 @RequestMapping("/api/v1/cursos")
 public class cursoController {
