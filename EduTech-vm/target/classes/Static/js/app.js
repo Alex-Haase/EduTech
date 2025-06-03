@@ -78,7 +78,7 @@ function eliminarCurso(id) {
 // Función para buscar un curso por su ID y cargarlo en el formulario
 // Se utiliza la API Fetch para obtener los datos del curso desde el servidor
 let cursoEnEdicionId = null; // Variable para almacenar el ID del curso en edición
-function buscarLibro(id) {
+function buscarCurso(id) {
     fetch(`${API_URL}/${id}`)
         .then(response => response.json())
         .then(curso => {
