@@ -6,6 +6,9 @@ import com.EduTech_vm.cl.EduTech_vm.Service.cursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.*;
 
 @RestController
@@ -15,6 +18,7 @@ public class carritoController {
 
     @Autowired
     private cursoService cursoService;
+    
     @PostMapping("/agregar/{id}")
     public String agregarCurso(@PathVariable int id){
         Curso curso = cursoService.getCursoId(id);
@@ -29,19 +33,16 @@ public class carritoController {
     public List<Curso> verCarrito(){
         return carrito;
     }
-
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping
     public String eliminarCurso(@PathVariable int id){
         boolean eliminado = carrito.removeIf(curso -> curso.getId() == id);
         return eliminado ? "Curso eliminado del carrito" : "Curso no estaba en el carrito";
     }
-
     @DeleteMapping("/vaciar")
     public String vaciarCarrito() {
         carrito.clear();
         return "Carrito vaciado";
     }
-    
     @GetMapping("/Total")
     public int totalCursosCarrito(){
         return carrito.size();
