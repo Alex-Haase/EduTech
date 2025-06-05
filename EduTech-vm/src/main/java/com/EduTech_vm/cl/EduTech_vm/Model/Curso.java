@@ -16,5 +16,6 @@ public class Curso {
     private String fechaTermino;
     private int capacidad;
     private String profesor;
+    private int precio;
 }
 

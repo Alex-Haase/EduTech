@@ -10,17 +10,17 @@ import com.EduTech_vm.cl.EduTech_vm.Model.Curso;;
 @Repository
 public class cursoRepository {
      
-    // Arreglo que guardara todos los libros
+    // Arreglo que guardara todos los cursos
     private final List<Curso> listaCursos = new ArrayList<>();
 
     public cursoRepository() {
-        // Agregar libros por defecto
-        listaCursos.add(new Curso(1, "informatica", "Introduccion a la informatica","20-04-2005" , "20-05-2005",30 ,"Alan Gajardo"));
-        listaCursos.add(new Curso(2, "cocina", "Introduccion a la cocina","20-05-2005" , "20-06-2005",25 ,"Sofia Mezas"));
-        listaCursos.add(new Curso(3, "ciberceguridad", "Introduccion a la ciberseguridad","20-04-2005" , "20-05-2005",30 ,"Pavel Morales"));
+        // Agregar cursos por defecto
+        listaCursos.add(new Curso(1, "informatica", "Introduccion a la informatica","20-04-2005" , "20-05-2005",30 ,"Alan Gajardo",50000));
+        listaCursos.add(new Curso(2, "cocina", "Introduccion a la cocina","20-05-2005" , "20-06-2005",25 ,"Sofia Mezas",40000));
+        listaCursos.add(new Curso(3, "ciberceguridad", "Introduccion a la ciberseguridad","20-04-2005" , "20-05-2005",30 ,"Pavel Morales",60000));
     }
 
-    // Metodo que retorna todoa los libros
+    // Metodo que retorna todoa los cursos
     public List<Curso> obtenerCursos() {
         return listaCursos;
     }
@@ -53,6 +53,7 @@ public class cursoRepository {
         curso.setFechaTermino(cur.getFechaTermino());
         curso.setCapacidad(cur.getCapacidad());
         curso.setProfesor(cur.getProfesor());
+        curso.setPrecio(cur.getPrecio());
 
         // Agregar el nuevo curso a la lista
         listaCursos.add(curso);
@@ -79,32 +80,13 @@ public class cursoRepository {
         curso1.setFechaTermino(cur.getFechaTermino());
         curso1.setCapacidad(cur.getCapacidad());
         curso1.setProfesor(cur.getProfesor());
-        
+        curso1.setPrecio(cur.getPrecio());
 
         listaCursos.set(idPosicion, curso1);
         return curso1;
     }
 
     public void eliminar(int id) {
-        // alternativa 1
-        // Libro libro = buscarPorId(id);
-        // if (libro != null) {
-        // listaLibros.remove(libro);
-        // }
-        //
-        // // alternativa 2
-        // int idPosicion = 0;
-        // for (int i = 0; i < listaLibros.size(); i++) {
-        // if (listaLibros.get(i).getId() == id) {
-        // idPosicion = i;
-        // break;
-        // }
-        // }
-        // if (idPosicion > 0) {
-        // listaLibros.remove(idPosicion);
-        // }
-
-        // otra alternativa
         listaCursos.removeIf(x -> x.getId() == id);
     }
 
