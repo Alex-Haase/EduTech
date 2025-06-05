@@ -362,7 +362,75 @@
         </div>
     </section>
 </div>
+<div class="container-fluid py-5">
+        <h1 class="text-center mb-4">YSE | Educación Digital Accesible</h1>
 
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4>Agregar un nuevo curso</h4>
+
+                <div class="row g-2">
+                    <div class="col-12 col-md"><input class="form-control" type="text" id="titulo" placeholder="Título"></div>
+                    <div class="col-12 col-md"><input class="form-control" type="text" id="autor" placeholder="Autor"></div>
+                    <div class="col-12 col-md"><input class="form-control" type="text" id="editorial" placeholder="Editorial"></div>
+                </div>
+
+                <div class="row g-2 mt-2">
+                    <div class="col-12 col-md"><input class="form-control" type="text" id="isbn" placeholder="ISBN"></div>
+                    <div class="col-12 col-md"><input class="form-control" type="number" id="fechaPublicacion" placeholder="Fecha de publicación"></div>
+                    <div class="col-12 col-md"><input class="form-control" type="number" id="precio" placeholder="Precio"></div>
+                    <div class="col-12 col-md d-grid"><button class="btn btn-success" id="botonFormulario" onclick="agregarCurso()">Agregar Curso</button></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tabla de cursos -->
+        <div class="card">
+            <div class="card-body">
+                <h4>Listado de Cursos</h4>
+                <button class="btn btn-primary mb-3" onclick="listarCursos()">🔄 Refrescar Lista</button>
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered" id="tablaCursos">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Título</th>
+                                <th>Descripcion</th>
+                                <th>FechaInicio</th>
+                                <th>FechaTermino</th>
+                                <th>Capacidad</th>
+                                <th>Precio</th>
+                                <th>Profesor</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+<!-- Carrito de compras -->
+        <div>
+            <hr class="my-5">
+            <h2>🛒 Carrito de Compras</h2>
+            <button class="btn btn-danger mb-2" onclick="carrito.vaciarCarrito()">Vaciar Carrito</button>
+            <button class="btn btn-success mb-2 ms-2" onclick="carrito.confirmarCompra()">Confirmar Compra</button>
+            <div class="table-responsive">
+                <table class="table table-striped" id="tablaCarrito">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <p><strong>Total de libros:</strong> <span id="totalCarrito">0</span></p>
+            <p><strong>Total a pagar:</strong> $<span id="totalPrecio">0</span></p>
+        </div>
+    </div>
 <footer>
     <div class="footer-links">
         <a href="terminos.html">Términos de Servicio</a>
@@ -372,6 +440,12 @@
     <p>YSE &copy; 2023 - Todos los derechos reservados</p>
     <p>Oficina Central: Providencia, Santiago de Chile</p>
 </footer>
+<!--Vincula el script para un saludo personalizado-->
+    <script src="js/app_in.js"></script>
+    <!-- Vincula el script externo para gestionar los libros-->
+    <script src="js/app.js"></script>
+    <!--Vincula el script del carrito de compra-->
+    <script src="js/app_ca.js"></script>   
 
 </body>
 </html>
