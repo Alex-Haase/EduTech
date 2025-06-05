@@ -43,7 +43,7 @@ public class carritoController {
         carrito.clear();
         return "Carrito vaciado";
     }
-    @GetMapping("/Total")
+    @GetMapping("/total")
     public int totalCursosCarrito(){
         return carrito.size();
     }

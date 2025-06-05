@@ -4,6 +4,5 @@ const nombre = sessionStorage.getItem("nombreUsuario");
     }
     function cerrarSesion() {
         sessionStorage.clear();
-        window.location.href = "/login.html"
-        
+        window.location.href = "login.html";
     }
