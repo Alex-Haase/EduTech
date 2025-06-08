@@ -160,3 +160,8 @@ function limpiarFormulario() {
 // Cargar cursos al abrir la página
 
 listarCursos();
+// Cargar cursos y carrito al abrir la página
+document.addEventListener("DOMContentLoaded", () => {
+    listarCursos();         // Cargar la lista de cursos
+    carrito.listarCarrito(); // Cargar el carrito (requiere app_carrito.js)
+});

@@ -251,6 +251,20 @@
                 margin-top: 15px;
             }
         }
+        #carrito-icono {
+            position: relative;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        #contador-carrito {
+            background-color: var(--secondary);
+            border-radius: 50%;
+            padding: 3px 7px;
+            font-size: 0.75rem;
+            margin-left: 5px;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -266,6 +280,10 @@
     <a href="nosotros.html">Nosotros</a>
     <a href="contacto.html">Contacto</a>
     <a href="blog.html">Contacto</a>
+    <a href="carrito.html" id="carrito-icono">
+  <i class="fas fa-shopping-cart"></i>
+  <span id="contador-carrito" style="background:red;color:white;border-radius:50%;padding:2px 8px;margin-left:5px;">0</span>
+</a>
 </nav>
 
 <div class="content">
@@ -384,9 +402,7 @@
 <div class="row g-2 mt-2"><div class="col-12 col-md"><input class="form-control" type="number" step="0.01" id="precio" placeholder="Precio"></div>
     <div class="col-12 col-md d-grid"><button class="btn btn-success" id="botonFormulario" onclick="agregarCurso()">Agregar Curso</button></div>
 </div>
-
-        
-        <!-- Tabla de cursos -->
+<!-- Tabla de cursos -->
         <div class="card">
             <div class="card-body">
                 <h4>Listado de Cursos</h4>
@@ -409,30 +425,7 @@
                     </table>
                 </div>
             </div>
-        </div>
-<!-- Carrito de compras -->
-        <div>
-            <hr class="my-5">
-            <h2>🛒 Carrito de Compras</h2>
-            <button class="btn btn-danger mb-2" onclick="carrito.vaciarCarrito()">Vaciar Carrito</button>
-            <button class="btn btn-success mb-2 ms-2" onclick="carrito.confirmarCompra()">Confirmar Compra</button>
-            <div class="table-responsive">
-                <table class="table table-striped" id="tablaCarrito">
-                    <thead class="table-dark">
-                        <tr>
-                           <!--  <th>ID</th>
-                            <th>Título</th>
-                            <th>descripcion</th>
-                            <th>Eliminar</th>-->
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-            <p><strong>Total de cursos:</strong> <span id="totalCarrito">0</span></p>
-            <p><strong>Total a pagar:</strong> $<span id="totalPrecio">0</span></p>
-        </div>
-    </div>
+        </div> 
 <footer>
     <div class="footer-links">
         <a href="terminos.html">Términos de Servicio</a>
@@ -450,4 +443,4 @@
     <script src="js/app_ca.js"></script>   
 
 </body>
-</html>
+</html> 

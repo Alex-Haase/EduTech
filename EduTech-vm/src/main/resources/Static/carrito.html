@@ -1,26 +1,198 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Carrito con localStorage</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carrito de Cursos - EduTech</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f9fafb;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+    .curso-item {
+      padding: 1rem;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      background-color: white;
+      box-shadow: 0 2px 5px rgb(0 0 0 / 0.05);
+      transition: box-shadow 0.3s ease;
+    }
+    .curso-item:hover {
+      box-shadow: 0 5px 15px rgb(0 0 0 / 0.15);
+    }
+    .btn-primary {
+      background-color: #1e90ff;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #0d6efd;
+    }
+    .btn-danger {
+      background-color: #e74c3c;
+      border: none;
+    }
+    .btn-danger:hover {
+      background-color: #c0392b;
+    }
+    .btn-success {
+      background-color: #27ae60;
+      border: none;
+    }
+    .btn-success:hover {
+      background-color: #219150;
+    }
+    hr.my-5 {
+      border-top: 2px solid #ced4da;
+    }
+    .totales {
+      font-size: 1.1rem;
+      margin-top: 1rem;
+    }
+  </style>
 </head>
 <body>
-  <h2>Productos</h2>
-  <div id="productos">
-    <div class="producto">
-      <span>Pelota - $10</span>
-      <button onclick="agregarAlCarrito('Pelota', 10)">Agregar</button>
-    </div>
-    <div class="producto">
-      <span>Zapatillas - $50</span>
-      <button onclick="agregarAlCarrito('Zapatillas', 50)">Agregar</button>
-    </div>
-  </div>
 
-  <h2>Carrito</h2>
-  <div id="carrito"></div>
-  <p><strong>Total: $<span id="total">0</span></strong></p>
+<div class="container my-5">
 
-  <script src="app_carrito.js"></script>
+  <h1 class="mb-4 text-center">🎓 Plataforma EduTech</h1>
+
+  <section id="seccionCursos">
+    <h2>📚 Cursos Disponibles</h2>
+    <p class="mb-4 text-muted">Explora nuestros cursos y agrégalos a tu carrito para reservar tu cupo.</p>
+
+    <div id="listaCursos" class="mb-5"></div>
+  </section>
+
+  <section id="seccionCarrito">
+    <hr class="my-5" />
+    <h2>🛒 Tu Carrito de Compras</h2>
+    <p class="text-muted mb-3">Aquí puedes revisar tus cursos seleccionados antes de confirmar tu compra.</p>
+
+    <div class="d-flex gap-2 mb-3">
+      <button class="btn btn-danger" onclick="carrito.vaciarCarrito()">🧹 Vaciar Carrito</button>
+      <button class="btn btn-success" onclick="carrito.confirmarCompra()">💳 Confirmar Compra</button>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered align-middle" id="tablaCarrito">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th style="width: 110px;">Eliminar</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="totales">
+      <p><strong>Total de cursos:</strong> <span id="totalCarrito">0</span></p>
+      <p><strong>Total a pagar:</strong> <span class="text-success fw-bold fs-5">$<span id="totalPrecio">0</span></span></p>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  // Ejemplo de cursos (puedes reemplazar con datos reales)
+  const cursosDisponibles = [
+    {id: 1, titulo: "Java Básico", descripcion: "Curso de Java para principiantes", fechaInicio:"2025-06-10", fechaTermino:"2025-07-10", capacidad:20, profesor:"Juan Pérez", precio:50000},
+    {id: 2, titulo: "Spring Boot", descripcion: "Aprende Spring Boot desde cero", fechaInicio:"2025-07-15", fechaTermino:"2025-08-15", capacidad:15, profesor:"Ana Gómez", precio:70000},
+    {id: 3, titulo: "React JS", descripcion: "Desarrolla aplicaciones web con React", fechaInicio:"2025-08-01", fechaTermino:"2025-08-30", capacidad:25, profesor:"Carlos Díaz", precio:60000}
+  ];
+
+  // Mostrar cursos con botón "Añadir"
+  const listaCursosDiv = document.getElementById("listaCursos");
+  cursosDisponibles.forEach(curso => {
+    const div = document.createElement("div");
+    div.classList.add("curso-item");
+    div.innerHTML = `
+      <h4>${curso.titulo}</h4>
+      <p class="mb-1">${curso.descripcion}</p>
+      <p class="mb-1"><strong>Profesor:</strong> ${curso.profesor}</p>
+      <p class="mb-2"><strong>Precio:</strong> $${curso.precio.toLocaleString('es-CL')}</p>
+      <button onclick='carrito.añadirCurso(${JSON.stringify(curso)})' class="btn btn-primary">➕ Añadir al carrito</button>
+    `;
+    listaCursosDiv.appendChild(div);
+  });
+
+  const carrito = {
+    cursos: [],
+
+    añadirCurso(curso) {
+      // Verificar si el curso ya está en el carrito
+      if (this.cursos.some(c => c.id === curso.id)) {
+        alert("❗ Este curso ya está en tu carrito.");
+        return;
+      }
+      this.cursos.push(curso);
+      this.actualizarVista();
+      alert(`✅ Curso "${curso.titulo}" agregado al carrito.`);
+    },
+
+    vaciarCarrito() {
+      if(confirm("⚠️ ¿Estás seguro que quieres vaciar todo tu carrito?")) {
+        this.cursos = [];
+        this.actualizarVista();
+      }
+    },
+
+    confirmarCompra() {
+      if(this.cursos.length === 0) {
+        alert("❗ Tu carrito está vacío, añade algún curso antes de comprar.");
+        return;
+      }
+      if(confirm(`💸 Confirmar compra por un total de $${this.totalPrecio().toLocaleString('es-CL')}?`)) {
+        alert("🎉 ¡Gracias por tu compra! Nos pondremos en contacto contigo.");
+        this.vaciarCarrito();
+      }
+    },
+
+    totalPrecio() {
+      return this.cursos.reduce((acc, curso) => acc + curso.precio, 0);
+    },
+
+    totalCursos() {
+      return this.cursos.length;
+    },
+
+    actualizarVista() {
+      const tbody = document.querySelector("#tablaCarrito tbody");
+      tbody.innerHTML = "";
+
+      this.cursos.forEach((curso, index) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${curso.id}</td>
+          <td>${curso.titulo}</td>
+          <td>${curso.descripcion}</td>
+          <td><button onclick="carrito.eliminarCurso(${index})" class="btn btn-danger btn-sm">🗑️ Eliminar</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById("totalCarrito").textContent = this.totalCursos();
+      document.getElementById("totalPrecio").textContent = this.totalPrecio().toLocaleString('es-CL');
+    },
+
+    eliminarCurso(index) {
+      if(confirm(`¿Quieres eliminar el curso "${this.cursos[index].titulo}" de tu carrito?`)) {
+        this.cursos.splice(index, 1);
+        this.actualizarVista();
+      }
+    }
+  };
+</script>
+
+<script src="js/app_carrito.js"></script>
 </body>
 </html>
+

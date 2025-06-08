@@ -67,6 +67,13 @@
         .contact-form button:hover {
             background: #0056b3;
         }
+        .confirmation {
+            display: none;
+            text-align: center;
+            margin-top: 15px;
+            color: #28a745;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -84,7 +91,7 @@
 
 <div class="contact-form">
     <h2>Envíanos un mensaje</h2>
-    <form action="mailto:tu-email@ejemplo.com" method="post" enctype="text/plain">
+    <form id="contactForm">
         <label for="name">Nombre:</label>
         <input type="text" id="name" name="name" required>
 
@@ -99,7 +106,48 @@
 
         <button type="submit">Enviar</button>
     </form>
+    <p class="confirmation" id="confirmationMessage">¡Gracias por escribirnos! Tu mensaje ha sido enviado con éxito. 💌</p>
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const data = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+
+            console.log("Enviando datos al backend:", data);
+
+            fetch('/api/contacto', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(res => {
+                if (res.ok) {
+                    document.getElementById('contactForm').reset();
+                    const confirmation = document.getElementById('confirmationMessage');
+                    confirmation.style.display = 'block';
+                    setTimeout(() => {
+                        confirmation.style.display = 'none';
+                    }, 5000);
+                } else {
+                    alert("Error al enviar el mensaje.");
+                }
+            })
+            .catch(err => {
+                console.error("Error:", err);
+                alert("No se pudo enviar el mensaje.");
+            });
+        });
+    });
+</script>
 </body>
 </html>

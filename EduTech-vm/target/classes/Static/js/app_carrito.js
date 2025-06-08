@@ -1,69 +1,83 @@
+// Módulo carrito: gestiona agregar, eliminar, vaciar y confirmar cursos en el carrito
 const carrito = (() => {
-    const API = "/api/v1/carrito";
-    
+    const API = "/api/v1/carrito";  // Endpoint base del backend para el carrito
+
+    // Cargar y mostrar los cursos que están actualmente en el carrito
     async function listarCarrito() {
         try {
             const response = await fetch(API); 
             const cursos = await response.json();
 
-            const tbody = document.querySelector("#tablaCarrito tbody"); // Obtener el tbody de la tabla
-            const totalSpan = document.getElementById("totalCarrito"); // Obtener el span del total
-            const totalPrecio = document.getElementById("totalPrecio"); // Obtener el span del total precio
-            tbody.innerHTML = ""; // Limpiar el tbody antes de agregar nuevos elementos
-            totalSpan.textContent = cursos.length; // Mostrar la cantidad de cursos en el carrito
+            // Elementos del DOM donde se mostrará la info del carrito
+            const tbody = document.querySelector("#tablaCarrito tbody");
+            const totalSpan = document.getElementById("totalCarrito");
+            const totalPrecio = document.getElementById("totalPrecio");
 
-            let sumaTotal = 0;// Inicializar sumaTotal
-            
-            cursos.forEach(curso => { // Iterar sobre cada curso en el carrito
-                sumaTotal += curso.precio ?? 0;// Asumiendo que cada curso tiene un precio
+            // Limpiar la tabla actual
+            tbody.innerHTML = "";
+            totalSpan.textContent = cursos.length; // Mostrar cantidad total de cursos
+
+            let sumaTotal = 0; // Para calcular el total en dinero
+
+            // Agregar cada curso a la tabla
+            cursos.forEach(curso => {
+                sumaTotal += curso.precio ?? 0;
+
                 const fila = `
                     <tr>
                         <td>${curso.id}</td>
                         <td>${curso.titulo}</td>
-                        <td>${curso.autor}</td>
+                        <td>${curso.profesor}</td>
                         <td> 
-                            <button class="btn btn-sm btn-danger" onclick="carrito.eliminarCurso(${curso.id})">🗑️</button> 
+                            <button class="btn btn-sm btn-danger" onclick="carrito.eliminarCurso(${curso.id})">
+                                🗑️ Eliminar
+                            </button> 
                         </td> 
                     </tr>
                 `;
-                tbody.innerHTML += fila; // Agregar la fila al tbody
+                tbody.innerHTML += fila;
             });
-            totalPrecio.textContent = sumaTotal; // Mostrar el total en el span
+
+            // Mostrar el total en pantalla
+            totalPrecio.textContent = sumaTotal;
 
         } catch (err) {
-            console.error("Error al cargar carrito", err);
+            console.error("❌ Error al cargar el carrito:", err);
         }
     }
-    // Funciones para agregar, eliminar y vaciar el carrito
+
+    // Agrega un curso al carrito
     async function agregarCurso(id) {
         try {
             await fetch(`${API}/agregar/${id}`, { method: "POST" });
-            alert("Libro agregado al carrito");
-            listarCarrito();
+            alert("✅ Curso agregado al carrito");
+            listarCarrito(); // Actualizar vista
         } catch (err) {
-            console.error("Error al agregar al carrito", err);
+            console.error("❌ Error al agregar curso al carrito:", err);
         }
     }
 
+    // Elimina un curso específico del carrito
     async function eliminarCurso(id) {
         try {
             await fetch(`${API}/eliminar/${id}`, { method: "DELETE" });
-            alert("Curso eliminado del carrito");
+            alert("🗑️ Curso eliminado del carrito");
             listarCarrito();
         } catch (err) {
-            console.error("Error al eliminar del carrito", err);
+            console.error("❌ Error al eliminar curso del carrito:", err);
         }
     }
 
+    // Vacía completamente el carrito
     async function vaciarCarrito() {
-        if (confirm("¿Estás seguro de vaciar el carrito?")) {
+        if (confirm("⚠️ ¿Estás seguro de vaciar el carrito?")) {
             await fetch(`${API}/vaciar`, { method: "DELETE" });
-            alert("Carrito vaciado");
+            alert("🧹 Carrito vaciado");
             listarCarrito();
         }
     }
-    // Función para confirmar la compra
-    // Se asume que el precio total se obtiene de la API o se calcula en el frontend
+
+    // Confirma la compra y limpia el carrito
     async function confirmarCompra() {
         const total = document.getElementById("totalPrecio").textContent;
         if (parseInt(total) === 0) {
@@ -71,18 +85,20 @@ const carrito = (() => {
             return;
         }
 
-        if (confirm(`¿Deseas confirmar tu compra por $${total}?`)) {
+        if (confirm(`💸 ¿Deseas confirmar tu compra por $${total}?`)) {
             await fetch(`${API}/vaciar`, { method: "DELETE" });
-            alert("¡Gracias por tu compra/reserva!");
+            alert("✅ ¡Gracias por tu compra/reserva!");
             listarCarrito();
         }
     }
 
+    // Expone funciones públicas del carrito
     return { listarCarrito, agregarCurso, eliminarCurso, vaciarCarrito, confirmarCompra };
 })();
 
-// Cargar carrito al iniciar
+
+// Cuando el documento esté listo, cargar cursos y el carrito
 document.addEventListener("DOMContentLoaded", () => {
-    app.listarCursos();        // del módulo anterior
-    carrito.listarCarrito();   // nuevo módulo
+    listarCursos();        // Este viene de tu módulo de cursos (debe estar definido)
+    carrito.listarCarrito();   // Mostrar cursos actuales del carrito
 });
