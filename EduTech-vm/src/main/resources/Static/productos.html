@@ -239,116 +239,73 @@
         <p>Descubre nuestra oferta educativa diseñada para potenciar tu desarrollo profesional en el mundo digital</p>
     </section>
     <div class="container-fluid py-5">
-        <h1 class="text-center mb-4">📚 Biblioteca Duoc</h1>
+        <h1 class="text-center mb-4">YSE | Educación Digital Accesible</h1>
 
         <div class="card mb-4">
             <div class="card-body">
-                <h4>Agregar un nuevo libro</h4>
+                <h4>Agregar un nuevo curso</h4>
 
                 <div class="row g-2">
                     <div class="col-12 col-md"><input class="form-control" type="text" id="titulo" placeholder="Título"></div>
                     <div class="col-12 col-md"><input class="form-control" type="text" id="autor" placeholder="Autor"></div>
                     <div class="col-12 col-md"><input class="form-control" type="text" id="editorial" placeholder="Editorial"></div>
                 </div>
+    <div class="col-12 col-md"><input class="form-control" type="text" id="titulo" placeholder="Título"></div>
+    <div class="col-12 col-md"><input class="form-control" type="text" id="descripcion" placeholder="Descripción"></div>
+    <div class="col-12 col-md"><input class="form-control" type="date" id="fechaInicio" placeholder="Fecha de inicio"></div>
+</div>
+
+    <div class="row g-2 mt-2">
+    <div class="col-12 col-md"><input class="form-control" type="date" id="fechaTermino" placeholder="Fecha de término"></div>
+    <div class="col-12 col-md"><input class="form-control" type="number" id="capacidad" placeholder="Capacidad"></div>
+    <div class="col-12 col-md"><input class="form-control" type="text" id="profesor" placeholder="Profesor"></div>
+</div>
+
+<div class="row g-2 mt-2"><div class="col-12 col-md"><input class="form-control" type="number" step="0.01" id="precio" placeholder="Precio"></div>
+    <div class="col-12 col-md d-grid"><button class="btn btn-success" id="botonFormulario" onclick="agregarCurso()">Agregar Curso</button></div>
+</div>
 
                 <div class="row g-2 mt-2">
                     <div class="col-12 col-md"><input class="form-control" type="text" id="isbn" placeholder="ISBN"></div>
                     <div class="col-12 col-md"><input class="form-control" type="number" id="fechaPublicacion" placeholder="Fecha de publicación"></div>
                     <div class="col-12 col-md"><input class="form-control" type="number" id="precio" placeholder="Precio"></div>
-                    <div class="col-12 col-md d-grid"><button class="btn btn-success" id="botonFormulario" onclick="agregarLibro()">Agregar Libro</button></div>
+                    <div class="col-12 col-md d-grid"><button class="btn btn-success" id="botonFormulario" onclick="agregarCurso()">Agregar Curso</button></div>
                 </div>
             </div>
         </div>
 
+        <!-- Tabla de cursos -->
+        <div class="card">
 
-
-    <h2 class="section-title">Cursos Disponibles</h2>
-    <div class="course-grid">
-        <div class="course-card">
-            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Data Science" class="course-image">
-            <div class="course-info">
-                <div class="course-category">Tecnología</div>
-                <h3 class="course-title">Data Science para Principiantes</h3>
-                <p class="course-description">Aprende los fundamentos del análisis de datos con Python en este curso introductorio.</p>
-                <div class="course-meta">
-                    <span class="course-price">$49.900</span>
-                    <span class="course-duration">8 semanas</span>
-                </div>
-                <a href="#" class="btn" style="display: block; margin-top: 15px; text-align: center;">Más información</a>
+                                <th>FechaInicio</th>
+                                <th>FechaTermino</th>
+                                <th>Capacidad</th>
+                                <th>Precio</th>
+                                <th>Profesor</th>
+                                <th>Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                <table class="table table-striped" id="tablaCarrito">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                        <!--  <th>ID</th>
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>Eliminar</th>
+                            <th>descripcion</th>
+                            <th>Eliminar</th>-->
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
-        </div>
-
-        <div class="course-card">
-            <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Marketing Digital" class="course-image">
-            <div class="course-info">
-                <div class="course-category">Marketing</div>
-                <h3 class="course-title">Marketing Digital Avanzado</h3>
-                <p class="course-description">Domina las estrategias más efectivas de marketing en redes sociales y medios digitales.</p>
-                <div class="course-meta">
-                    <span class="course-price">$39.900</span>
-                    <span class="course-duration">6 semanas</span>
-                </div>
-                <a href="#" class="btn" style="display: block; margin-top: 15px; text-align: center;">Más información</a>
-            </div>
-        </div>
-
-        <div class="course-card">
-            <img src="https://images.unsplash.com/photo-1542621334-a254cf47733d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Liderazgo" class="course-image">
-            <div class="course-info">
-                <div class="course-category">Desarrollo Personal</div>
-                <h3 class="course-title">Liderazgo en el Siglo XXI</h3>
-                <p class="course-description">Desarrolla habilidades de liderazgo efectivo para entornos profesionales modernos.</p>
-                <div class="course-meta">
-                    <span class="course-price">$34.900</span>
-                    <span class="course-duration">5 semanas</span>
-                </div>
-                <a href="#" class="btn" style="display: block; margin-top: 15px; text-align: center;">Más información</a>
-            </div>
-        </div>
-
-        <div class="course-card">
-            <img src="https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Diseño UX/UI" class="course-image">
-            <div class="course-info">
-                <div class="course-category">Diseño</div>
-                <h3 class="course-title">Diseño UX/UI Profesional</h3>
-                <p class="course-description">Aprende a crear experiencias de usuario memorables e interfaces efectivas.</p>
-                <div class="course-meta">
-                    <span class="course-price">$44.900</span>
-                    <span class="course-duration">7 semanas</span>
-                </div>
-                <a href="#" class="btn" style="display: block; margin-top: 15px; text-align: center;">Más información</a>
-            </div>
-        </div>
-
-        <div class="course-card">
-            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Analítica Web" class="course-image">
-            <div class="course-info">
-                <div class="course-category">Tecnología</div>
-                <h3 class="course-title">Analítica Web con Google Analytics</h3>
-                <p class="course-description">Domina las herramientas para medir y analizar el tráfico de tu sitio web.</p>
-                <div class="course-meta">
-                    <span class="course-price">$29.900</span>
-                    <span class="course-duration">4 semanas</span>
-                </div>
-                <a href="#" class="btn" style="display: block; margin-top: 15px; text-align: center;">Más información</a>
-            </div>
-        </div>
-
-        <div class="course-card">
-            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Finanzas Personales" class="course-image">
-            <div class="course-info">
-                <div class="course-category">Finanzas</div>
-                <h3 class="course-title">Finanzas Personales</h3>
-                <p class="course-description">Aprende a gestionar tu dinero, ahorrar e invertir de manera inteligente.</p>
-                <div class="course-meta">
-                    <span class="course-price">$24.900</span>
-                    <span class="course-duration">4 semanas</span>
-                </div>
-                <a href="#" class="btn" style="display: block; margin-top: 15px; text-align: center;">Más información</a>
-            </div>
+            <p><strong>Total de libros:</strong> <span id="totalCarrito">0</span></p>
+            <p><strong>Total de cursos:</strong> <span id="totalCarrito">0</span></p>Add commentMore actions
+            <p><strong>Total a pagar:</strong> $<span id="totalPrecio">0</span></p>
         </div>
     </div>
-</div>
 
 <footer>
     <div class="footer-links">
