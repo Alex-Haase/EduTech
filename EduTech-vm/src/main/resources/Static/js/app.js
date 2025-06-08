@@ -91,8 +91,7 @@ function buscarCurso(id) {
             document.getElementById("precio").value = curso.precio;
             
             // Guardar el ID del curso en edición
-             cursoEnEdicionId = curso.id;
-             
+            cursoEnEdicionId = curso.id;
             // Cambiar el botón de agregar por actualizar
             const boton = document.getElementById("botonFormulario");
             if (boton) {
