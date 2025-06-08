@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog | YSE Educación Digital</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2C3E50;
+      --secondary: #E74C3C;
+      --accent: #3498DB;
+      --light: #ECF0F1;
+      --dark: #1A252F;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--dark));
+      padding: 40px 20px;
+      color: white;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .logo {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: white;
+    }
+    .logo span {
+      color: var(--accent);
+    }
+    nav {
+      background-color: var(--primary);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      color: white;
+      padding: 18px 25px;
+      text-decoration: none;
+      display: block;
+      transition: all 0.3s;
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+    nav a:hover {
+      background-color: var(--secondary);
+    }
+    .content {
+      padding: 50px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1531496662535-076b4f2a4f20?auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      border-radius: 8px;
+      margin-bottom: 40px;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 30px;
+    }
+    .section-title {
+      color: var(--primary);
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 10px;
+      display: inline-block;
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    .feature-card {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    .feature-icon {
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .btn {
+      display: inline-block;
+      background-color: var(--secondary);
+      color: white;
+      padding: 12px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .btn:hover {
+      background-color: #C0392B;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    footer {
+      background-color: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 60px;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .footer-links a {
+      color: var(--light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    #carrito-icono {
+      position: relative;
+      display: flex;
+      align-items: center;
+      color: white;
+    }
+    #contador-carrito {
+      background-color: var(--secondary);
+      border-radius: 50%;
+      padding: 3px 7px;
+      font-size: 0.75rem;
+      margin-left: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Y<span>SE</span></div>
+  <p>Transformando la educación digital en Chile</p>
+</header>
+
+<nav>
+  <a href="index.html">Inicio</a>
+  <a href="cursos.html">Cursos</a>
+  <a href="nosotros.html">Nosotros</a>
+  <a href="contacto.html">Contacto</a>
+  <a href="blog.html">Blog</a>
+  <a href="carrito.html" id="carrito-icono">
+    <i class="fas fa-shopping-cart"></i>
+    <span id="contador-carrito">0</span>
+  </a>
+</nav>
+
+<div class="content">
+  <section class="hero">
+    <h1>Blog YSE</h1>
+    <p>Explora artículos, consejos y tendencias para tu crecimiento en el mundo tecnológico.</p>
+  </section>
+
+  <section class="features">
+    <h2 class="section-title">Últimos Artículos</h2>
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-code"></i></div>
+        <h3>¿Python o JavaScript?</h3>
+        <p>Descubre qué lenguaje de programación deberías aprender primero y por qué.</p>
+        <a href="#" class="btn">Leer más</a>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-lightbulb"></i></div>
+        <h3>Consejos para estudiar online</h3>
+        <p>Aprende cómo sacar el máximo provecho a tus cursos digitales desde casa.</p>
+        <a href="#" class="btn">Leer más</a>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-briefcase"></i></div>
+        <h3>Tu primer empleo tech</h3>
+        <p>Guía práctica para encontrar tu primer trabajo en tecnología sin experiencia previa.</p>
+        <a href="#" class="btn">Leer más</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="terminos.html">Términos de Servicio</a>
+    <a href="privacidad.html">Política de Privacidad</a>
+    <a href="preguntas.html">Preguntas Frecuentes</a>
+  </div>
+  <p>YSE &copy; 2023 - Todos los derechos reservados</p>
+  <p>Oficina Central: Providencia, Santiago de Chile</p>
+</footer>
+
+<script src="js/app_in.js"></script>
+<script src="js/app.js"></script>
+<script src="js/app_ca.js"></script>
+
+</body>
+</html>
