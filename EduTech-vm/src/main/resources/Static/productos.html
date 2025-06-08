@@ -232,19 +232,35 @@
     <a href="blog.html">Blog</a>
 </nav>
 
+
 <div class="content">
     <section class="hero">
         <h1>Nuestros Cursos</h1>
         <p>Descubre nuestra oferta educativa diseñada para potenciar tu desarrollo profesional en el mundo digital</p>
     </section>
+    <div class="container-fluid py-5">
+        <h1 class="text-center mb-4">📚 Biblioteca Duoc</h1>
 
-    <div class="category-filter">
-        <button class="filter-btn active">Todos</button>
-        <button class="filter-btn">Tecnología</button>
-        <button class="filter-btn">Negocios</button>
-        <button class="filter-btn">Diseño</button>
-        <button class="filter-btn">Desarrollo Personal</button>
-    </div>
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4>Agregar un nuevo libro</h4>
+
+                <div class="row g-2">
+                    <div class="col-12 col-md"><input class="form-control" type="text" id="titulo" placeholder="Título"></div>
+                    <div class="col-12 col-md"><input class="form-control" type="text" id="autor" placeholder="Autor"></div>
+                    <div class="col-12 col-md"><input class="form-control" type="text" id="editorial" placeholder="Editorial"></div>
+                </div>
+
+                <div class="row g-2 mt-2">
+                    <div class="col-12 col-md"><input class="form-control" type="text" id="isbn" placeholder="ISBN"></div>
+                    <div class="col-12 col-md"><input class="form-control" type="number" id="fechaPublicacion" placeholder="Fecha de publicación"></div>
+                    <div class="col-12 col-md"><input class="form-control" type="number" id="precio" placeholder="Precio"></div>
+                    <div class="col-12 col-md d-grid"><button class="btn btn-success" id="botonFormulario" onclick="agregarLibro()">Agregar Libro</button></div>
+                </div>
+            </div>
+        </div>
+
+
 
     <h2 class="section-title">Cursos Disponibles</h2>
     <div class="course-grid">
