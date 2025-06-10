@@ -12,7 +12,6 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
 @RestController
 @RequestMapping("/api/v2/usuarios")
 @CrossOrigin //controlador para manejar las peticiones que realiza los usuarios
