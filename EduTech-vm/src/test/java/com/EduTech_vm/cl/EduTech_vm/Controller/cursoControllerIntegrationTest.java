@@ -14,7 +14,7 @@ import org.springframework.http.MediaType;
 
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
+
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -41,7 +41,7 @@ public class cursoControllerIntegrationTest {
         mockMvc.perform(get("/api/v1/cursos"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
-                .andExpect(jsonPath("$[0].titulo").value("Curso1"));
+                .andExpect(jsonPath("$[0].titulo").value("informatica"));
     }
 
     @Test
@@ -54,7 +54,7 @@ public class cursoControllerIntegrationTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(curso)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.titulo").value("Nuevo curso"));
+                .andExpect(jsonPath("$.titulo").value("aplicaciones moviles"));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class cursoControllerIntegrationTest {
 
         mockMvc.perform(get("/api/v1/cursos/5"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.titulo").value("Buscado"));
+                .andExpect(jsonPath("$.titulo").value("informatica"));
     }
 
     @Test

@@ -63,7 +63,7 @@ public class usuarioControllerIntegrationTest {
         usuario newUser = new usuario();//usar tabla ususario y crear una variable para crear un usuario simulado
         newUser.setNombre("Alex");//nombre usuario simulado
         newUser.setEmail("Alex@gmail.com");//mail usuario simulado
-        newUser.setPassword("1324");//Password usuario simulado 
+        newUser.setPassword("1234");//Password usuario simulado 
         
         //simula que el usuario existe
         when(usuarioService.registrar(any(usuario.class))).thenReturn(newUser);
@@ -75,8 +75,8 @@ public class usuarioControllerIntegrationTest {
             .content(ObjectMApper.writeValueAsString(newUser)))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.nombre").value("Alex"))
-            .andExpect(jsonPath("$.nombre").value("Alex@gmail.com"))
-            .andExpect(jsonPath("$.nombre").value("1234"));  
+            .andExpect(jsonPath("$.email").value("Alex@gmail.com"))
+            .andExpect(jsonPath("$.password").value("1234"));  
     }
 
     @Test
@@ -111,16 +111,15 @@ public class usuarioControllerIntegrationTest {
 
         //simula comportamiento login con usuario no registrado 
 
-        when(usuarioService.autenticar("noexiste@gmail.com", "1234"))
+        when(usuarioService.autenticar("alex@gmail.com", "1234"))
             .thenReturn(Optional.empty());
 
 
             mockMvc.perform(post("/api/v2/usuarios/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(ObjectMApper.writeValueAsString(userInexistente)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.result").value("Error"));
-
+                .andExpect(status().isUnauthorized())
+                .andExpect(jsonPath("$.error").value("usuario no encontrado"));
     }
 
 }
