@@ -25,12 +25,15 @@ public class usuarioController {//clase maneja las peticiones REST (GET,PUT,POST
 
     //Metodo para crear usuarios
     @Operation(summary = "Registrar un nuevo usuario", description = "Permite registrar un nuevo usuario en la plataforma")
+
     @PostMapping("/registrar")
     public usuario registrar(@RequestBody usuario u) {//crear un usuario en la tabla usuario       
         return serv.registrar(u);//llamar la funcion registrar del usuarioService 
     }
+    
     //Metodo para autenticar los usuarios en la base de datos
     @Operation(summary = "Iniciar sesión", description = "Permite a un usuario iniciar sesión en la plataforma")
+
     @PostMapping("/login")
     public Map<String, String> login(@RequestBody com.EduTech_vm.cl.EduTech_vm.Model.usuario u) {      
         Optional <com.EduTech_vm.cl.EduTech_vm.Model.usuario> user = serv.autenticar(u.getEmail(), u.getPassword()); // auntenticar al usuario con el email y el password

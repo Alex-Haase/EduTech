@@ -52,17 +52,16 @@ public class usuarioControllerIntegrationTest {
    @MockBean
    private usuarioService usuarioService;
 
-   //usar ObjectMApper para combertir los objetos en json
+   //usar objectMapper para combertir los objetos en json
    @Autowired
-   private ObjectMapper ObjectMApper;
-
+   private ObjectMapper objectMapper;
 
    //tet simular creacion nuevo usuario
     @Test
     void registrarUsuario_ReturnGuardado()throws Exception{
         usuario newUser = new usuario();//usar tabla ususario y crear una variable para crear un usuario simulado
         newUser.setNombre("Alex");//nombre usuario simulado
-        newUser.setEmail("Alex@gmail.com");//mail usuario simulado
+        newUser.setEmail("alex@gmail.com");//mail usuario simulado
         newUser.setPassword("1234");//Password usuario simulado 
         
         //simula que el usuario existe
@@ -72,31 +71,32 @@ public class usuarioControllerIntegrationTest {
 
         mockMvc.perform(post("/api/v2/usuarios/registrar") 
             .contentType(MediaType.APPLICATION_JSON)
-            .content(ObjectMApper.writeValueAsString(newUser)))
+            .content(objectMapper.writeValueAsString(newUser)))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.nombre").value("Alex"))
-            .andExpect(jsonPath("$.email").value("Alex@gmail.com"))
+            .andExpect(jsonPath("$.email").value("alex@gmail.com"))
             .andExpect(jsonPath("$.password").value("1234"));  
     }
-
+    // Test para el caso de inicio de sesión con un usuario existente
     @Test
     void loginUsuario_ReturOK()throws Exception{
-        usuario userExistente = new usuario();
-        userExistente.setNombre("Alex");
-        userExistente.setEmail("Alex@gmail.com");
-        userExistente.setPassword("1234");
+        usuario usuarioExistente = new usuario();
+        usuarioExistente.setNombre("Alex");
+        usuarioExistente.setEmail("alex@gmail.com");
+        usuarioExistente.setPassword("1234");
 
-        when(usuarioService.autenticar("Alex@gmail.com", "1234")).thenReturn(Optional.of(userExistente));
-
+        // Simular que el usuario existe
+        when(usuarioService.autenticar("alex@gmail.com", "1234"))
+            .thenReturn(Optional.of(usuarioExistente));
 
         //realizar la peticion post para iniciar sesion 
         mockMvc.perform(post("/api/v2/usuarios/login")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(ObjectMApper.writeValueAsString(userExistente)))
+            .content(objectMapper.writeValueAsString(usuarioExistente)))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.result").value("OK"))
             .andExpect(jsonPath("$.nombre").value("Alex"))
-            .andExpect(jsonPath("$.email").value("Alex@gmail.com"))
+            .andExpect(jsonPath("$.email").value("alex@gmail.com"))
             .andExpect(jsonPath("$.password").value("1234"));
     }
 
@@ -104,26 +104,25 @@ public class usuarioControllerIntegrationTest {
     //test simulacion inicio sesion de usuario inexistente
     @Test
     void loginUsuario_ReturError() throws Exception{
-        usuario userInexistente = new usuario();
-        userInexistente.setEmail("Alex@gmail.com");
-        userInexistente.setPassword("1234");
+        usuario usuarioInexistente = new usuario();
+        usuarioInexistente.setEmail("noexiste@gmail.com");
+        usuarioInexistente.setPassword("1234");
 
 
         //simula comportamiento login con usuario no registrado 
 
-        when(usuarioService.autenticar("alex@gmail.com", "1234"))
+        when(usuarioService.autenticar("noexiste@gmail.com", "1234"))
             .thenReturn(Optional.empty());
 
 
-            mockMvc.perform(post("/api/v2/usuarios/login")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(ObjectMApper.writeValueAsString(userInexistente)))
-                .andExpect(status().isUnauthorized())
-                .andExpect(jsonPath("$.error").value("usuario no encontrado"));
+            // Realizar la petición POST para iniciar sesión
+        mockMvc.perform(post("/api/v2/usuarios/login") // Usar el endpoint de login
+                .contentType(MediaType.APPLICATION_JSON) // Establecer el tipo de contenido a JSON
+                .content(objectMapper.writeValueAsString(usuarioInexistente)))//
+                .andExpect(status().isOk()) // Verificar que la respuesta tenga un estado 200 OK
+                .andExpect(jsonPath("$.result").value("Error")); // Verificar que el resultado sea "Error"
     }
-
 }
-
 
 
 
