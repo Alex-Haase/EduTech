@@ -1,4 +1,4 @@
-API_URL = "http://localhost:8080/api/v1/usuarios/login";
+API_URL = "http://localhost:8080/api/v2/usuarios/login";
 
 function login() {
     fetch(API_URL, {

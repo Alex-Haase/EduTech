@@ -120,7 +120,7 @@ public class usuarioControllerIntegrationTest {
                 .contentType(MediaType.APPLICATION_JSON) // Establecer el tipo de contenido a JSON
                 .content(objectMapper.writeValueAsString(usuarioInexistente)))//
                 .andExpect(status().isOk()) // Verificar que la respuesta tenga un estado 200 OK
-                .andExpect(jsonPath("$.result").value("Error")); // Verificar que el resultado sea "Error"
+                .andExpect(jsonPath("$.result").value("ERROR")); // Verificar que el resultado sea "Error"
     }
 }
 
