@@ -15,40 +15,49 @@ import org.springframework.web.bind.annotation.RestController;
 import com.EduTech_vm.cl.EduTech_vm.Model.Curso;
 import com.EduTech_vm.cl.EduTech_vm.Service.cursoService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/v1/cursos")
+@Tag(name = "Cursos", description = "Operaciones relacionadas con los cursos")
 public class cursoController {
     @Autowired
     private cursoService cursoService;
 
+    @Operation(summary = "Listar todos los cursos", description = "Obtiene una lista de todos los cursos disponibles")
     @GetMapping
     public List<Curso> listarCursos() {
         return cursoService.getCursos();
     }
 
+    @Operation(summary = "Agregar un nuevo curso", description = "Permite agregar un nuevo curso a la plataforma")
     @PostMapping
     public Curso agregarCurso(@RequestBody Curso curso) {
         return cursoService.saveCurso(curso);
     }
 
+    @Operation(summary = "Buscar un curso por ID", description = "Obtiene un curso específico por su ID")
     @GetMapping("{id}")
     public Curso buscarCurso(@PathVariable int id){
         return cursoService.getCursoId(id);
     }
 
+    @Operation(summary = "Actualizar un curso", description = "Permite actualizar la información de un curso existente")
     @PutMapping("{id}")
     public Curso actualizarCurso(@PathVariable int id, @RequestBody Curso curso){
         // el id lo usaremos mas adelante
         return cursoService.updateCurso(curso);
     }
 
+    @Operation(summary = "Eliminar un curso", description = "Permite eliminar un curso específico de la plataforma")
     @DeleteMapping("{id}")
     public String eliminarCurso(@PathVariable int id) {
         return cursoService.deleteCurso(id);
     }
 
 
+    @Operation(summary = "Contar el total de cursos", description = "Obtiene el número total de cursos disponibles")
     @GetMapping("/total")
     public int totalCursosV2() {
         return cursoService.totalCursosV2();
