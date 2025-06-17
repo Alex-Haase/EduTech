@@ -12,31 +12,38 @@ import org.springframework.stereotype.Service;
 public class carritoService {
 
     private final List<Curso> carrito = new ArrayList<>();
-
     private final cursoRepository cursoRepository;
 
     public carritoService(cursoRepository cursoRepository) {
         this.cursoRepository = cursoRepository;
     }
 
+    // Listar todos los cursos en el carrito
     public List<Curso> listar() {
         return new ArrayList<>(carrito);
     }
 
-    public boolean agregar(int cursoId) {
+    // Agregar un curso al carrito y devolverlo
+    public Curso agregar(int cursoId) {
         Curso curso = cursoRepository.buscarPorId(cursoId);
         if (curso != null) {
             carrito.add(curso);
-            return true;
         }
-        return false;
+        return curso;
     }
 
+    // Eliminar un curso por su ID
     public boolean eliminar(int cursoId) {
         return carrito.removeIf(c -> c.getId() == cursoId);
     }
 
+    // Vaciar todo el carrito
     public void vaciar() {
         carrito.clear();
+    }
+
+    // Obtener la cantidad total de cursos en el carrito
+    public int total() {
+        return carrito.size();
     }
 }
