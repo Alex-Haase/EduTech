@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 import java.util.HashMap;
 import java.util.Map;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,7 +28,7 @@ public class usuarioController {//clase maneja las peticiones REST (GET,PUT,POST
     public usuario registrar(@RequestBody usuario u) {//crear un usuario en la tabla usuario       
         return serv.registrar(u);//llamar la funcion registrar del usuarioService 
     }
-    
+
     //Metodo para autenticar los usuarios en la base de datos
     @Operation(summary = "Iniciar sesión", description = "Permite a un usuario iniciar sesión en la plataforma")
 
@@ -39,10 +37,11 @@ public class usuarioController {//clase maneja las peticiones REST (GET,PUT,POST
         Optional <com.EduTech_vm.cl.EduTech_vm.Model.usuario> user = serv.autenticar(u.getEmail(), u.getPassword()); // auntenticar al usuario con el email y el password
         Map<String,String> respuesta = new HashMap<>();// crea un mapa para almacenar la respuesta de lo anterior
         if (user.isPresent()){
-            respuesta.put("Result","Ok");
-            respuesta.put("Nombre", user.get().getNombre());
+            respuesta.put("result","OK");
+            respuesta.put("nombre", user.get().getNombre());
+            respuesta.put("email", user.get().getEmail());
         }else{
-            respuesta.put("Result", "ERROR");
+            respuesta.put("result", "ERROR");
         }
         return respuesta;
     }

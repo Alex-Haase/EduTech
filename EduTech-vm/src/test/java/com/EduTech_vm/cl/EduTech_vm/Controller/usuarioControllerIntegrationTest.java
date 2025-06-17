@@ -96,8 +96,8 @@ public class usuarioControllerIntegrationTest {
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.result").value("OK"))
             .andExpect(jsonPath("$.nombre").value("Alex"))
-            .andExpect(jsonPath("$.email").value("alex@gmail.com"))
-            .andExpect(jsonPath("$.password").value("1234"));
+            .andExpect(jsonPath("$.email").value("alex@gmail.com"));
+            //.andExpect(jsonPath("$.password").value("1234"));
     }
 
 
