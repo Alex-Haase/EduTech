@@ -14,7 +14,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/api/v2/usuarios")
+@RequestMapping("/api/v1/usuarios")
 @CrossOrigin //controlador para manejar las peticiones que realiza los usuarios
 @Tag(name = "Usuarios", description = "Operaciones relacionadas con los usuarios")
 public class usuarioController {//clase maneja las peticiones REST (GET,PUT,POST,DELETE,)

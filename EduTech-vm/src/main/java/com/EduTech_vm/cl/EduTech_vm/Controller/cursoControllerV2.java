@@ -29,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/cursos")
+@RequestMapping("/api/v2/cursos")
 @Tag(name = "Cursos", description = "Operaciones relacionadas con los cursos")
 public class cursoControllerV2 {
     @Autowired

@@ -13,8 +13,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 //Importamos las librerías de swagger para la documentación de la API
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
+//import io.swagger.v3.oas.annotations.Operation;
+//import io.swagger.v3.oas.annotations.tags.Tag;
 
 //Importar el assembler para HATEOAS
 import com.EduTech_vm.cl.EduTech_vm.Assemblers.CursoModelAssembler;
@@ -33,7 +33,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/carrito")
+@RequestMapping("/api/v2/carrito")
 //La anotación Tag se usa para agrupar y etiquetar los controladores dentro de la documentación
 @Tag(name = "Carrito de Compras", description = "Operaciones sobre el carrito de compras")
 public class carritoControllerV2 {
