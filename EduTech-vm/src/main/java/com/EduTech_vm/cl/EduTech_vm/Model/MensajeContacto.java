@@ -13,14 +13,14 @@ public class MensajeContacto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonProperty("name")
+    @JsonProperty("nombre")
     private String nombre;
 
     private String email;
 
-    @JsonProperty("subject")
+    @JsonProperty("asunto")
     private String asunto;
 
-    @JsonProperty("message")
+    @JsonProperty("mensaje")
     private String mensaje;
 }

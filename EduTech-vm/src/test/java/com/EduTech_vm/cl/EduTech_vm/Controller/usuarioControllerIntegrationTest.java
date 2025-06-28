@@ -69,7 +69,7 @@ public class usuarioControllerIntegrationTest {
     
         //realiza peticion post
 
-        mockMvc.perform(post("/api/v2/usuarios/registrar") 
+        mockMvc.perform(post("/api/v1/usuarios/registrar") 
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(newUser)))
             .andExpect(status().isOk())
@@ -90,7 +90,7 @@ public class usuarioControllerIntegrationTest {
             .thenReturn(Optional.of(usuarioExistente));
 
         //realizar la peticion post para iniciar sesion 
-        mockMvc.perform(post("/api/v2/usuarios/login")
+        mockMvc.perform(post("/api/v1/usuarios/login")
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(usuarioExistente)))
             .andExpect(status().isOk())
@@ -116,7 +116,7 @@ public class usuarioControllerIntegrationTest {
 
 
             // Realizar la petición POST para iniciar sesión
-        mockMvc.perform(post("/api/v2/usuarios/login") // Usar el endpoint de login
+        mockMvc.perform(post("/api/v1/usuarios/login") // Usar el endpoint de login
                 .contentType(MediaType.APPLICATION_JSON) // Establecer el tipo de contenido a JSON
                 .content(objectMapper.writeValueAsString(usuarioInexistente)))//
                 .andExpect(status().isOk()) // Verificar que la respuesta tenga un estado 200 OK
