@@ -1,15 +1,12 @@
-// Este archivo contiene el código JavaScript para la gestión de libros en la aplicación web.
-// Se utiliza para realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre los libros.
-const API_URL = "http://localhost:8080/api/v1/cursos"; // URL de la API para acceder a los libros
-// Función para listar los libros en la tabla
-// Se utiliza la API Fetch para obtener los datos de los libros desde el servidor
+const API_URL = "http://localhost:8080/api/v1/cursos";
+
 function listarCursos() {
     fetch(API_URL)
         .then(response => response.json())
-        .then(Cursos => {
+        .then(cursos => {
             const tbody = document.querySelector("#tablaCursos tbody");
             tbody.innerHTML = "";
-            Cursos.forEach(curso => {
+            cursos.forEach(curso => {
                 const fila = `
                     <tr>
                         <td>${curso.id}</td>
@@ -19,68 +16,89 @@ function listarCursos() {
                         <td>${curso.fechaTermino}</td>
                         <td>${curso.capacidad}</td>
                         <td>${curso.profesor}</td>
-                        <td>${curso.precio}</td>
-                        <td> 
-                            <button class="btn btn-danger btn-sm" onclick="eliminarCurso(${curso.id})">🗑️ Eliminar</button> 
-                            <button class="btn btn-warning btn-sm" onclick="buscarCurso(${curso.id})">✏️ Editar</button> 
-                            <button class="btn btn-success btn-sm" onclick="carrito.agregarCurso(${curso.id})">🛒 Añadir</button>
+                        <td>$${parseFloat(curso.precio).toFixed(2)}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" onclick="eliminarCurso(${curso.id})">🗑️ Eliminar</button>
+                            <button class="btn btn-warning btn-sm" onclick="buscarCurso(${curso.id})">✏️ Editar</button>
                         </td>
                     </tr>
-                `; 
+                `;
                 tbody.innerHTML += fila;
             });
+        })
+        .catch(e => {
+            alert("Error al cargar cursos: " + e);
+            console.error(e);
         });
 }
-let Cursos = []; // Variable para almacenar la lista de cursos
-// Función para agregar un curso
+
 function agregarCurso() {
-    const titulo = document.getElementById("titulo").value;
-    const descripcion= document.getElementById("descripcion").value;
+    const titulo = document.getElementById("titulo").value.trim();
+    const descripcion = document.getElementById("descripcion").value.trim();
     const fechaInicio = document.getElementById("fechaInicio").value;
     const fechaTermino = document.getElementById("fechaTermino").value;
-    const capacidad = document.getElementById("capacidad").value;
-    const profesor = document.getElementById("profesor").value;
-    const precio = document.getElementById("precio").value;
-    
+    const capacidad = parseInt(document.getElementById("capacidad").value);
+    const profesor = document.getElementById("profesor").value.trim();
+    const precio = parseFloat(document.getElementById("precio").value);
+
+    if (!titulo || !descripcion || !fechaInicio || !fechaTermino || isNaN(capacidad) || !profesor || isNaN(precio)) {
+        alert("Por favor completa todos los campos correctamente.");
+        return;
+    }
+
     const nuevoCurso = {
         titulo,
         descripcion,
-        fechaInicio: parseInt(fechaInicio) || new Date().getFullYear(),
-        fechaTermino: parseInt(fechaTermino) || new Date().getFullYear(),
+        fechaInicio,
+        fechaTermino,
         capacidad,
         profesor,
-        precio: parseInt(precio) || 0 // Asegurarse de que el precio sea un número
+        precio
     };
-    // Enviar el nuevo curso al servidor
-    // Se utiliza la API Fetch para enviar los datos al servidor
+
     fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(nuevoCurso)
-    })// Enviar el nuevo curso al servidor
-    .then(response => response.json())
+    })
+    .then(res => {
+        if (!res.ok) throw new Error("Error al agregar curso");
+        return res.json();
+    })
     .then(data => {
         alert("Curso agregado exitosamente");
-        listarCursos();// Actualizar la tabla de cursos
-        limpiarFormulario();// Limpiar el formulario
+        listarCursos();
+        limpiarFormulario();
+    })
+    .catch(e => {
+        alert("Error al agregar curso: " + e);
+        console.error(e);
     });
 }
-// Función para eliminar un curso
+
 function eliminarCurso(id) {
+    if (!confirm("¿Seguro quieres eliminar este curso?")) return;
+
     fetch(`${API_URL}/${id}`, { method: "DELETE" })
-        .then(response => {
-            if (response.ok) {
-                alert("Curso eliminado exitosamente");
-                listarCursos();
-            }
+        .then(res => {
+            if (!res.ok) throw new Error("Error al eliminar curso");
+            alert("Curso eliminado exitosamente");
+            listarCursos();
+        })
+        .catch(e => {
+            alert("Error al eliminar curso: " + e);
+            console.error(e);
         });
 }
-// Función para buscar un curso por su ID y cargarlo en el formulario
-// Se utiliza la API Fetch para obtener los datos del curso desde el servidor
-let cursoEnEdicionId = null; // Variable para almacenar el ID del curso en edición
+
+let cursoEnEdicionId = null;
+
 function buscarCurso(id) {
     fetch(`${API_URL}/${id}`)
-        .then(response => response.json())
+        .then(res => {
+            if (!res.ok) throw new Error("Curso no encontrado");
+            return res.json();
+        })
         .then(curso => {
             document.getElementById("titulo").value = curso.titulo;
             document.getElementById("descripcion").value = curso.descripcion;
@@ -89,39 +107,42 @@ function buscarCurso(id) {
             document.getElementById("capacidad").value = curso.capacidad;
             document.getElementById("profesor").value = curso.profesor;
             document.getElementById("precio").value = curso.precio;
-            
-            // Guardar el ID del curso en edición
+
             cursoEnEdicionId = curso.id;
-            // Cambiar el botón de agregar por actualizar
+
             const boton = document.getElementById("botonFormulario");
-            if (boton) {
-                boton.textContent = "Actualizar Curso";
-                boton.onclick = function() {
-                    actualizarCurso(curso.id);
-                };
-            }
+            boton.textContent = "Actualizar Curso";
+            boton.onclick = () => actualizarCurso(curso.id);
+        })
+        .catch(e => {
+            alert("Error al cargar curso: " + e);
+            console.error(e);
         });
 }
-// Función para actualizar un curso
-// Se utiliza la API Fetch para enviar los datos actualizados al servidor
+
 function actualizarCurso(id) {
-    const titulo = document.getElementById("titulo").value;
-    const descripcion= document.getElementById("descripcion").value;
+    const titulo = document.getElementById("titulo").value.trim();
+    const descripcion = document.getElementById("descripcion").value.trim();
     const fechaInicio = document.getElementById("fechaInicio").value;
     const fechaTermino = document.getElementById("fechaTermino").value;
-    const capacidad = document.getElementById("capacidad").value;
-    const profesor = document.getElementById("profesor").value;
-    const precio = document.getElementById("precio").value;
+    const capacidad = parseInt(document.getElementById("capacidad").value);
+    const profesor = document.getElementById("profesor").value.trim();
+    const precio = parseFloat(document.getElementById("precio").value);
+
+    if (!titulo || !descripcion || !fechaInicio || !fechaTermino || isNaN(capacidad) || !profesor || isNaN(precio)) {
+        alert("Por favor completa todos los campos correctamente.");
+        return;
+    }
 
     const cursoActualizado = {
-        id: id,
-        titulo: titulo,
-        descripcion: descripcion,
-        fechaInicio: parseInt(fechaInicio) || new Date().getFullYear() ,
-        fechaTermino: parseInt(fechaTermino) || new Date().getFullYear(),
-        capacidad: capacidad,
-        profesor,profesor,
-        precio: parseInt(precio) || 0 // Asegurarse de que el precio sea un número
+        id,
+        titulo,
+        descripcion,
+        fechaInicio,
+        fechaTermino,
+        capacidad,
+        profesor,
+        precio
     };
 
     fetch(`${API_URL}/${id}`, {
@@ -129,15 +150,21 @@ function actualizarCurso(id) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(cursoActualizado)
     })
-    .then(response => response.json())
+    .then(res => {
+        if (!res.ok) throw new Error("Error al actualizar curso");
+        return res.json();
+    })
     .then(data => {
         alert("Curso actualizado exitosamente");
         listarCursos();
         limpiarFormulario();
+    })
+    .catch(e => {
+        alert("Error al actualizar curso: " + e);
+        console.error(e);
     });
 }
-// Función para limpiar el formulario después de agregar o actualizar un libro
-// Se utiliza para restaurar el formulario a su estado inicial
+
 function limpiarFormulario() {
     document.getElementById("titulo").value = "";
     document.getElementById("descripcion").value = "";
@@ -147,20 +174,14 @@ function limpiarFormulario() {
     document.getElementById("profesor").value = "";
     document.getElementById("precio").value = "";
 
-    // Restaurar botón
-    const boton = document.getElementById("botonFormulario");
-    boton.innerText = "Agregar Curso";
-    boton.setAttribute("onclick", "agregarCurso()");
+    cursoEnEdicionId = null;
 
-    // Resetear la variable global
-    cursoEnEdicionId = null; // Resetear el ID después de limpiar
+    const boton = document.getElementById("botonFormulario");
+    boton.textContent = "Agregar Curso";
+    boton.onclick = agregarCurso;
 }
 
-// Cargar cursos al abrir la página
-
-listarCursos();
-// Cargar cursos y carrito al abrir la página
+// Iniciar cargando cursos al cargar la página
 document.addEventListener("DOMContentLoaded", () => {
-    listarCursos();         // Cargar la lista de cursos
-    carrito.listarCarrito(); // Cargar el carrito (requiere app_carrito.js)
+    listarCursos();
 });

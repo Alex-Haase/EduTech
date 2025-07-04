@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Cursos | YSE Edutech</title>
     <style>
         :root {
@@ -82,6 +82,17 @@
             max-width: 800px;
             margin: 0 auto 30px;
         }
+        input.form-control {
+            border: 1.5px solid #ddd;
+            border-radius: 8px;
+            padding: 10px 15px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input.form-control:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 8px var(--accent);
+            outline: none;
+        }
         .btn {
             display: inline-block;
             background-color: var(--secondary);
@@ -94,11 +105,49 @@
             border: none;
             cursor: pointer;
             font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
         }
         .btn:hover {
             background-color: #C0392B;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 12px rgba(192, 57, 43, 0.5);
+        }
+        .btn-success {
+            background-color: var(--secondary);
+        }
+        .btn-primary {
+            background-color: var(--accent);
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.4);
+        }
+        .btn-primary:hover {
+            background-color: #2980b9;
+            box-shadow: 0 6px 15px rgba(41, 128, 185, 0.6);
+            transform: translateY(-3px);
+        }
+        .btn-danger {
+            background-color: #e74c3c;
+            border: none;
+            box-shadow: 0 3px 7px rgba(231, 76, 60, 0.5);
+            font-weight: 600;
+        }
+        .btn-danger:hover {
+            background-color: #c0392b;
+            box-shadow: 0 6px 12px rgba(192, 57, 43, 0.7);
+            transform: translateY(-2px);
+        }
+        .btn-warning {
+            background-color: #f39c12;
+            border: none;
+            box-shadow: 0 3px 7px rgba(243, 156, 18, 0.5);
+            color: #1a252f;
+            font-weight: 700;
+        }
+        .btn-warning:hover {
+            background-color: #d68910;
+            box-shadow: 0 6px 12px rgba(214, 137, 16, 0.7);
+            transform: translateY(-2px);
         }
         .section-title {
             color: var(--primary);
@@ -184,12 +233,59 @@
             color: white;
             border-color: var(--accent);
         }
+        table.table {
+            border-collapse: separate;
+            border-spacing: 0 8px;
+            width: 100%;
+        }
+        table.table th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: none;
+            padding: 12px 15px;
+            border-radius: 8px 8px 0 0;
+            text-align: left;
+        }
+        table.table td {
+            background-color: white;
+            border: none;
+            padding: 12px 15px;
+            vertical-align: middle;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+            border-radius: 0 0 8px 8px;
+        }
+        table.table tbody tr:hover td {
+            background-color: var(--light);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            background-color: #fff;
+            transition: box-shadow 0.4s ease;
+            margin-bottom: 30px;
+        }
+        .card:hover {
+            box-shadow: 0 14px 40px rgba(0,0,0,0.12);
+        }
+        h4 {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 0.05em;
+        }
         footer {
             background-color: var(--dark);
             color: white;
             text-align: center;
             padding: 30px 20px;
             margin-top: 60px;
+            box-shadow: inset 0 15px 15px -15px rgba(255,255,255,0.1);
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
         }
         .footer-links {
             display: flex;
@@ -232,41 +328,40 @@
     <a href="blog.html">Blog</a>
 </nav>
 
-
 <div class="content">
     <section class="hero">
         <h1>Nuestros Cursos</h1>
         <p>Descubre nuestra oferta educativa diseñada para potenciar tu desarrollo profesional en el mundo digital</p>
     </section>
 
-
-
-
-<div class="container-fluid py-5">
+    <div class="container-fluid py-5">
         <h1 class="text-center mb-4">YSE | Educación Digital Accesible</h1>
 
-        <div class="card mb-4">
+        <div class="card">
             <div class="card-body">
                 <h4>Agregar un nuevo curso</h4>
-
                 <div class="row g-2">
-    <div class="col-12 col-md"><input class="form-control" type="text" id="titulo" placeholder="Título"></div>
-    <div class="col-12 col-md"><input class="form-control" type="text" id="descripcion" placeholder="Descripción"></div>
-    <div class="col-12 col-md"><input class="form-control" type="date" id="fechaInicio" placeholder="Fecha de inicio"></div>
-</div>
+                    <div class="col-12 col-md"><input class="form-control" type="text" id="titulo" placeholder="Título" /></div>
+                    <div class="col-12 col-md"><input class="form-control" type="text" id="descripcion" placeholder="Descripción" /></div>
+                    <div class="col-12 col-md"><input class="form-control" type="date" id="fechaInicio" placeholder="Fecha de inicio" /></div>
+                </div>
+                <div class="row g-2 mt-2">
+                    <div class="col-12 col-md"><input class="form-control" type="date" id="fechaTermino" placeholder="Fecha de término" /></div>
+                    <div class="col-12 col-md"><input class="form-control" type="number" id="capacidad" placeholder="Capacidad" /></div>
+                    <div class="col-12 col-md"><input class="form-control" type="text" id="profesor" placeholder="Profesor" /></div>
+                </div>
+                <div class="row g-2 mt-2">
+                    <div class="col-12 col-md">
+                        <input class="form-control" type="number" step="0.01" id="precio" placeholder="Precio" />
+                    </div>
+                    <div class="col-12 col-md d-grid">
+                        <button class="btn btn-success" id="botonFormulario" onclick="agregarCurso()">Agregar Curso</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div class="row g-2 mt-2">
-    <div class="col-12 col-md"><input class="form-control" type="date" id="fechaTermino" placeholder="Fecha de término"></div>
-    <div class="col-12 col-md"><input class="form-control" type="number" id="capacidad" placeholder="Capacidad"></div>
-    <div class="col-12 col-md"><input class="form-control" type="text" id="profesor" placeholder="Profesor"></div>
-</div>
-
-<div class="row g-2 mt-2"><div class="col-12 col-md"><input class="form-control" type="number" step="0.01" id="precio" placeholder="Precio"></div>
-    <div class="col-12 col-md d-grid"><button class="btn btn-success" id="botonFormulario" onclick="agregarCurso()">Agregar Curso</button></div>Add commentMore actions
-</div>
-
-
-<div class="card">
+        <div class="card">
             <div class="card-body">
                 <h4>Listado de Cursos</h4>
                 <button class="btn btn-primary mb-3" onclick="listarCursos()">🔄 Refrescar Lista</button>
@@ -282,15 +377,16 @@
                                 <th>Capacidad</th>
                                 <th>Profesor</th>
                                 <th>Precio</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody></tbody>More actions
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
         </div>
-
-
+    </div>
+</div>
 
 <footer>
     <div class="footer-links">
@@ -302,16 +398,192 @@
     <p>Oficina Central: Providencia, Santiago de Chile</p>
 </footer>
 
-
 <script>
-    // Filtrado de cursos por categoría
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            document.querySelector('.filter-btn.active').classList.remove('active');
-            this.classList.add('active');
-            // Aquí iría la lógica para filtrar los cursos
+const API_URL = "http://localhost:8080/api/v1/cursos";
+
+function listarCursos() {
+    fetch(API_URL)
+        .then(res => res.json())
+        .then(cursos => {
+            const tbody = document.querySelector("#tablaCursos tbody");
+            tbody.innerHTML = "";
+            cursos.forEach(curso => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${curso.id}</td>
+                        <td>${curso.titulo}</td>
+                        <td>${curso.descripcion}</td>
+                        <td>${curso.fechaInicio}</td>
+                        <td>${curso.fechaTermino}</td>
+                        <td>${curso.capacidad}</td>
+                        <td>${curso.profesor}</td>
+                        <td>$${parseFloat(curso.precio).toFixed(2)}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" onclick="eliminarCurso(${curso.id})">🗑️ Eliminar</button>
+                            <button class="btn btn-warning btn-sm" onclick="buscarCurso(${curso.id})">✏️ Editar</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        })
+        .catch(e => {
+            alert("Error al cargar cursos");
+            console.error(e);
         });
+}
+
+function agregarCurso() {
+    const titulo = document.getElementById("titulo").value.trim();
+    const descripcion = document.getElementById("descripcion").value.trim();
+    const fechaInicio = document.getElementById("fechaInicio").value;
+    const fechaTermino = document.getElementById("fechaTermino").value;
+    const capacidad = parseInt(document.getElementById("capacidad").value);
+    const profesor = document.getElementById("profesor").value.trim();
+    const precio = parseFloat(document.getElementById("precio").value);
+
+    if (!titulo || !descripcion || !fechaInicio || !fechaTermino || isNaN(capacidad) || !profesor || isNaN(precio)) {
+        alert("Por favor completa todos los campos correctamente.");
+        return;
+    }
+
+    const nuevoCurso = {
+        titulo,
+        descripcion,
+        fechaInicio,
+        fechaTermino,
+        capacidad,
+        profesor,
+        precio
+    };
+
+    fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(nuevoCurso)
+    })
+    .then(res => {
+        if (!res.ok) throw new Error("Error al agregar curso");
+        return res.json();
+    })
+    .then(() => {
+        alert("Curso agregado exitosamente");
+        listarCursos();
+        limpiarFormulario();
+    })
+    .catch(e => {
+        alert("Error al agregar curso");
+        console.error(e);
     });
+}
+
+function eliminarCurso(id) {
+    if (!confirm("¿Seguro quieres eliminar este curso?")) return;
+
+    fetch(`${API_URL}/${id}`, { method: "DELETE" })
+        .then(res => {
+            if (!res.ok) throw new Error("Error al eliminar curso");
+            alert("Curso eliminado exitosamente");
+            listarCursos();
+        })
+        .catch(e => {
+            alert("Error al eliminar curso");
+            console.error(e);
+        });
+}
+
+let cursoEnEdicionId = null;
+
+function buscarCurso(id) {
+    fetch(`${API_URL}/${id}`)
+        .then(res => {
+            if (!res.ok) throw new Error("Curso no encontrado");
+            return res.json();
+        })
+        .then(curso => {
+            document.getElementById("titulo").value = curso.titulo;
+            document.getElementById("descripcion").value = curso.descripcion;
+            document.getElementById("fechaInicio").value = curso.fechaInicio;
+            document.getElementById("fechaTermino").value = curso.fechaTermino;
+            document.getElementById("capacidad").value = curso.capacidad;
+            document.getElementById("profesor").value = curso.profesor;
+            document.getElementById("precio").value = curso.precio;
+
+            cursoEnEdicionId = curso.id;
+
+            const boton = document.getElementById("botonFormulario");
+            boton.textContent = "Actualizar Curso";
+            boton.onclick = () => actualizarCurso(curso.id);
+        })
+        .catch(e => {
+            alert("Error al cargar curso");
+            console.error(e);
+        });
+}
+
+function actualizarCurso(id) {
+    const titulo = document.getElementById("titulo").value.trim();
+    const descripcion = document.getElementById("descripcion").value.trim();
+    const fechaInicio = document.getElementById("fechaInicio").value;
+    const fechaTermino = document.getElementById("fechaTermino").value;
+    const capacidad = parseInt(document.getElementById("capacidad").value);
+    const profesor = document.getElementById("profesor").value.trim();
+    const precio = parseFloat(document.getElementById("precio").value);
+
+    if (!titulo || !descripcion || !fechaInicio || !fechaTermino || isNaN(capacidad) || !profesor || isNaN(precio)) {
+        alert("Por favor completa todos los campos correctamente.");
+        return;
+    }
+
+    const cursoActualizado = {
+        id,
+        titulo,
+        descripcion,
+        fechaInicio,
+        fechaTermino,
+        capacidad,
+        profesor,
+        precio
+    };
+
+    fetch(`${API_URL}/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(cursoActualizado)
+    })
+    .then(res => {
+        if (!res.ok) throw new Error("Error al actualizar curso");
+        return res.json();
+    })
+    .then(() => {
+        alert("Curso actualizado exitosamente");
+        listarCursos();
+        limpiarFormulario();
+    })
+    .catch(e => {
+        alert("Error al actualizar curso");
+        console.error(e);
+    });
+}
+
+function limpiarFormulario() {
+    document.getElementById("titulo").value = "";
+    document.getElementById("descripcion").value = "";
+    document.getElementById("fechaInicio").value = "";
+    document.getElementById("fechaTermino").value = "";
+    document.getElementById("capacidad").value = "";
+    document.getElementById("profesor").value = "";
+    document.getElementById("precio").value = "";
+
+    cursoEnEdicionId = null;
+
+    const boton = document.getElementById("botonFormulario");
+    boton.textContent = "Agregar Curso";
+    boton.onclick = agregarCurso;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    listarCursos();
+});
 </script>
 
 </body>
